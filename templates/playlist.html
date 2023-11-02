@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}playlist{% endblock title %}
+{% block body %}
+
+
+
+
+<div class="container">
+
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Create Playlist
+  </button>
+  <br>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form method="post" enctype="multipart/form-data" action="{% url 'create_your_playlist' %}">
+                {% csrf_token %}
+                {% comment %} <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="file">File</label>
+                    <input type="file" class="form-control-file" id="file" name="file" required>
+                </div>{% endcomment %}
+                {{form}}
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+    <br/>
+    <!-- {{artists}} -->
+    <ul class="list-group">
+        {% for pl in playlists %}
+          
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <h5>{{pl.title}}</h5>
+            
+            <span class=""><h5>
+                <a type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal1">Add Track</a>
+                <a href="tracks_mgt/?param_uuid={{pl.uuid}}" type="button" class="btn btn-info">Read({{pl.track.count}})</a>
+                
+                </h5>
+
+
+                <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <form method="post" enctype="multipart/form-data" action="update_playlist/{{pl.uuid}}">
+                            {% csrf_token %}
+                              <label for="Title">Title:</label>
+                              <input type="hidden" id="title" name="title" value="{{pl.uuid}}">
+                              <input type="hidden" id="title" name="title" value="{{pl.title}}">
+                              {{form.track}}
+                              <button type="submit" class="btn btn-primary">Save</button>
+                          </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+            </span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock body %}

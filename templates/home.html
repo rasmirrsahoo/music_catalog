@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+
+
+
+{% block body %}
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="{% static 'image/musics.jpeg' %}" class="card-img-top" alt="Card Image">
+                <div class="card-body">
+                    <h5 class="card-title">Music Tracks</h5>
+                    <p class="card-text">Explore the Musics.</p>
+                    <a href="{% url "tracks_mgt" %}" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="{% static 'image/albams.jpg' %}" class="card-img-top" alt="Card Image">
+                <div class="card-body">
+                    <h5 class="card-title">Albums</h5>
+                    <p class="card-text">Explore the Albums</p>
+                    <a href="{% url "albam_mgt" %}" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="{% static 'image/playlists.jpg' %}" class="card-img-top" alt="Card Image">
+                <div class="card-body">
+                    <h5 class="card-title">Playlists</h5>
+                    <p class="card-text">Explore your Playlist.</p>
+                    <a href="{% url "play_list" %}" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
